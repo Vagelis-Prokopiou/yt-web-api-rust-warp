@@ -10,7 +10,7 @@ pub fn get_users() -> Vec<User> {
             Age: 25,
             First_Name: format!("First_Name{}", index),
             Last_Name: format!("Last_Name{}", index),
-            Framework: "Rust (actix-web)".to_owned(),
+            Framework: "Rust (warp)     ".to_owned(),
         })
     }
     users
