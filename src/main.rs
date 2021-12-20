@@ -19,6 +19,6 @@ fn main() {
             .and(warp::path::end())
             .map(|| warp::reply::json(&get_users()));
 
-        warp::serve(users_route).run(([127, 0, 0, 1], 8084)).await;
+        warp::serve(users_route).run(([127, 0, 0, 1], 8082)).await;
     });
 }
