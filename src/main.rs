@@ -1,9 +1,24 @@
+use tokio::runtime::Builder;
 use warp::Filter;
 
-use api::get_users;
+use api_warp::get_users;
 
-#[tokio::main]
-async fn main() {
-    let users = warp::path!("users").map(|| warp::reply::json(&get_users()));
-    warp::serve(users).run(([127, 0, 0, 1], 8084)).await;
+fn main() {
+    // build runtime
+    let runtime = Builder::new_multi_thread()
+        .enable_all()
+        .worker_threads(8)
+        .build()
+        .unwrap();
+
+    // Execute the future, blocking the current thread until completion
+    runtime.block_on(async {
+        let users_route = warp::path("api")
+            .and(warp::path("v1"))
+            .and(warp::path("users"))
+            .and(warp::path::end())
+            .map(|| warp::reply::json(&get_users()));
+
+        warp::serve(users_route).run(([127, 0, 0, 1], 8084)).await;
+    });
 }
