@@ -15,3 +15,4 @@ name = "api_warp"
 tokio = { version = "*", features = ["full"] }
 warp = "*"
 serde = { version = "*", features = ["derive"] }
+num_cpus = "*"
