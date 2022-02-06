@@ -8,7 +8,7 @@ fn main() {
     let runtime = Builder::new_multi_thread()
         .enable_all()
         .worker_threads(logical_cpu_cores)
-        .worker_threads(physical_cpu_cores)
+        // .worker_threads(physical_cpu_cores)
         .build()
         .unwrap();
 
