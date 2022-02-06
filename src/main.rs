@@ -5,10 +5,13 @@ use api_warp::and_then_get_users;
 use api_warp::then_get_users;
 
 fn main() {
+    let logical_cpu_cores = num_cpus::get();
+    let physical_cpu_cores = num_cpus::get_physical();
+
     let runtime = Builder::new_multi_thread()
         .enable_all()
-        //.worker_threads(num_cpus::get_physical())
-        .worker_threads(num_cpus::get()) // Best result
+        .worker_threads(logical_cpu_cores)
+        // .worker_threads(physical_cpu_cores)
         .build()
         .unwrap();
 
