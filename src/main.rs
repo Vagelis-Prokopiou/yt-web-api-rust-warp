@@ -2,9 +2,13 @@ use tokio::runtime::Builder;
 use warp::Filter;
 
 fn main() {
+    let logical_cpu_cores = num_cpus::get();
+    let physical_cpu_cores = num_cpus::get_physical();
+
     let runtime = Builder::new_multi_thread()
         .enable_all()
-        .worker_threads(num_cpus::get_physical())
+        .worker_threads(logical_cpu_cores)
+        .worker_threads(physical_cpu_cores)
         .build()
         .unwrap();
 
